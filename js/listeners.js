@@ -1,5 +1,4 @@
 addEventListener('keydown', function(e){
-	console.log(e.keyCode)
   if(e.keyCode === 38){
     aztecaHero.up()
   }
