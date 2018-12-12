@@ -1,13 +1,23 @@
 function checkColition() {
 	demons.forEach(function(demon){
-		if(demon.isTouching()){
-			console.log(""); 
+		if(demon.isTouching(aztecaHero) && demon.active){
+			console.log("Demon toca a azteca"); 
+			//programar evento destroy del azteca
 		}
+		shots.forEach(function(shoot){
+			if(demon.active &&  shoot.active && shoot.isTouching(demon)){
+				console.log("shoot pega a demon"); 
+				demon.destroy();
+				shoot.destroy();
+				aztecaHero.addScore(10);
+				generateDemon(); 
+				//shots.splice(shoot, 1);
+				console.log(shoot)
+			}
+		});
 	});
-
+	
 }
-
-
 
 function generateShoot(x,y){
 	console.log("Genera disparo", x,y);
@@ -23,16 +33,17 @@ function generateDemon(){
 }
 
 function drawShoots(){
-	console.log("Dibuja las balas del arreglo");
+	
 	shots.forEach(function(shoot){
 		shoot.draw();
 	})
 }
 
 function drawDemons(){
-	console.log("Dibuja los demonios")
+	
 	demons.forEach(function (demon){
 		demon.draw();
+		
 	});
 }
 
