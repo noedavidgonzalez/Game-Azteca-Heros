@@ -1,29 +1,49 @@
 function checkColition() {
 	demons.forEach(function(demon){
-		if(demon.isTouching(aztecaHero) && demon.active){
-			console.log("Demon toca a azteca"); 
+		if(demon.isTouching(player1) && demon.active){
+			console.log("Demon toca a player1"); 
 			//programar evento destroy del azteca
+			player1.life-=10;
+			demon.destroy();
+			generateDemon();
 		}
-		shots.forEach(function(shoot){
+		if(demon.isTouching(player2) && demon.active){
+			console.log("Demon toca a player2"); 
+			//programar evento destroy del azteca
+			player2.life-=5;
+		}
+		shotsP1.forEach(function(shoot){
 			if(demon.active &&  shoot.active && shoot.isTouching(demon)){
-				console.log("shoot pega a demon"); 
+				console.log("shoot P1 pega a demon"); 
 				demon.destroy();
 				shoot.destroy();
-				aztecaHero.addScore(10);
-				generateDemon(); 
-				//shots.splice(shoot, 1);
-				console.log(shoot)
+				player1.addScore(1);
+				for(let a=1;a<=(Math.floor((Math.random() * 2)+1));a++)
+				generateDemon();
+			}
+		});
+		shotsP2.forEach(function(shoot){
+			if(demon.active &&  shoot.active && shoot.isTouching(demon)){
+				console.log("shoot P2 pega a demon"); 
+				demon.destroy();
+				shoot.destroy();
+				player2.addScore(1);
+				for(let a=1;a<=(Math.floor((Math.random() * 2)+1));a++)
+				generateDemon();
 			}
 		});
 	});
 	
 }
 
-function generateShoot(x,y){
-	console.log("Genera disparo", x,y);
-	let shoot= new ShootAzteca(x,y);
-	console.log("shoot: ",shoot.x, shoot.y)
-	shots.push(shoot);
+function generateShootP1(x,y){ 
+	let shoot= new ShootAzteca(x,y); 
+	shotsP1.push(shoot);
+}
+
+function generateShootP2(x,y){ 
+	let shoot= new ShootAzteca(x,y); 
+	shotsP2.push(shoot);
 }
 
 function generateDemon(){
@@ -34,7 +54,10 @@ function generateDemon(){
 
 function drawShoots(){
 	
-	shots.forEach(function(shoot){
+	shotsP1.forEach(function(shoot){
+		shoot.draw();
+	})
+	shotsP2.forEach(function(shoot){
 		shoot.draw();
 	})
 }
@@ -48,11 +71,26 @@ function drawDemons(){
 }
 
 function gameOver() {
-	if(aztecaHero.y < 0 || aztecaHero.y > canvas.height - aztecaHero.height 
+	if(player1.y < 0 || player1.y > canvas.height - player1.height 
 	  || checkColition() ){
 	  clearInterval(interval)
 	  interval = 0;
 	  ctx.font = "50px Arial";
-	  ctx.fillText("Fin",canvas.width/2,canvas.height/2);
+	  ctx.fillText("Game Over",canvas.width/2,canvas.height/2);
 	}
+	if(player1.life==0){
+		interval = 0;
+		ctx.font = "50px Arial";
+		ctx.fillText("Game Over",canvas.width/2,canvas.height/2);
+		delta=0;
+	}
+	
 }
+
+function drawRotatedImage(image, x, y, angle) {  
+  ctx.save(); 
+  ctx.translate(x, y); 
+  ctx.rotate(angle * TO_RADIANS); 
+  ctx.drawImage(image, -(image.width/2), -(image.height/2)); 
+  ctx.restore(); 
+  }
