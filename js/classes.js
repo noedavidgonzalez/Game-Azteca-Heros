@@ -40,7 +40,7 @@ function Eart() {
 }
 function QuetzalcoatlHero(){
   this.ready=false;
-  this.speed=256
+  this.speed=256 
   this.score=0;
   this.x = 100;
   this.y = canvas.height/2;
@@ -92,7 +92,7 @@ function QuetzalcoatlHero(){
     ctx.stroke();
     ctx.closePath();
     ctx.fillStyle="#4CAE51";
-    ctx.fillRect(490,10ee,this.life*2,16);
+    ctx.fillRect(490,10,this.life*2,16);
   }
 }
 function TlalocHero(){
@@ -141,6 +141,17 @@ function TlalocHero(){
     this.score+=score;
   }
   this.life=100;
+  this.life=100;
+  this.drawLife = function(){
+    ctx.beginPath();
+    ctx.lineWidth="1";
+    ctx.strokeStyle="white";
+    ctx.rect(489,canvas.height-15,202,15);
+    ctx.stroke();
+    ctx.closePath();
+    ctx.fillStyle="#4CAE51";
+    ctx.fillRect(490,canvas.height-15,this.life*2,16);
+  }
 }
 function Demon(){
   this.active= true;
@@ -164,7 +175,7 @@ function Demon(){
           player2.life-=10;
         this.x = Math.floor(Math.random() * ((canvas.width- this.width) - canvas.width+1)+canvas.width);
         this.y = Math.floor(Math.random() * (canvas.height-this.height));
-      }
+      } 
       ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
     }
   }
