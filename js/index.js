@@ -41,7 +41,7 @@ var render= function(){
 var reset = function () { 
   frames=0;
 
-  player2.active=false;
+  player2.active=true;
 
   player1.x = 200;
   player1.y = (canvas.height/2)-(player1.height/2) -(player2.active?player2.height:0);
