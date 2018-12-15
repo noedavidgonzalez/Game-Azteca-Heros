@@ -10,7 +10,9 @@ function checkColition() {
 		if(demon.isTouching(player2) && demon.active){
 			console.log("Demon toca a player2"); 
 			//programar evento destroy del azteca
-			player2.life-=5;
+			player2.life-=10;
+			demon.destroy();
+			generateDemon();
 		}
 		shotsP1.forEach(function(shoot){
 			if(demon.active &&  shoot.active && shoot.isTouching(demon)){

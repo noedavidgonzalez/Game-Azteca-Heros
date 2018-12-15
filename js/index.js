@@ -13,7 +13,9 @@ var render= function(){
      player1.draw(); 
     player1.drawLife();
   }
+   
   if(player2.active && player2.ready){
+
     player2.draw();  
     player2.drawLife();
   }
