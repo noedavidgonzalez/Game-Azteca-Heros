@@ -1,14 +1,14 @@
-addEventListener('keydown', function(e){
-  if(e.keyCode === 38){
-    aztecaHero.up()
+
+addEventListener("keydown", function (e) {
+  keysDown[e.keyCode] = true;
+  if (32 == e.keyCode) { // Player1 shot
+    player1.shoot();
   }
-  if(e.keyCode === 40){
-    aztecaHero.down()
-  }
-  if(e.keyCode === 39){
-    aztecaHero.right()
-  }
-  if(e.keyCode === 37){
-    aztecaHero.left()
-  }
-})
+  if (player2.active && 68 == e.keyCode ) { // Player2 shot
+    player2.shoot();
+  } 
+});
+
+addEventListener("keyup", function (e) {
+  delete keysDown[e.keyCode];
+});

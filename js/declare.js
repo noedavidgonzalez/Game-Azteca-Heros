@@ -1,8 +1,10 @@
-let canvas = document.querySelector('#canvas')
-let ctx = canvas.getContext('2d')
-   
-let aztecaHero = new AztecaHero();
+let canvas = document.querySelector('#canvas');
+let ctx = canvas.getContext('2d');
+let player1 = new QuetzalcoatlHero();
+let player2 = new TlalocHero();
 let board= new Board();
-let enemy= new Enemy();
-let interval, frames = 0;
- 
+let eart= new Eart();
+let demons= [], shotsP1=[], shotsP2=[];
+let interval, frames;
+let keysDown = {};
+let TO_RADIANS = Math.PI/180; 
